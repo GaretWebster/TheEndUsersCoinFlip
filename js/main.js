@@ -94,14 +94,226 @@ function loadFooter(){
 
 }
 
+var options = {
+    
+    ///Boolean - Whether grid lines are shown across the chart
+    scaleShowGridLines : true,
+    
+    //String - Colour of the grid lines
+    scaleGridLineColor : "rgba(104, 206, 222, 0.1)",
+    
+    //Number - Width of the grid lines
+    scaleGridLineWidth : 1,
+    
+    //Boolean - Whether to show horizontal lines (except X axis)
+    scaleShowHorizontalLines: true,
+    
+    //Boolean - Whether to show vertical lines (except Y axis)
+    scaleShowVerticalLines: true,
+    
+    //Boolean - Whether the line is curved between points
+    bezierCurve : true,
+    
+    //Number - Tension of the bezier curve between points
+    bezierCurveTension : 0.4,
+    
+    //Boolean - Whether to show a dot for each point
+    pointDot : true,
+    
+    //Number - Radius of each point dot in pixels
+    pointDotRadius : 4,
+    
+    //Number - Pixel width of point dot stroke
+    pointDotStrokeWidth : 1,
+    
+    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+    pointHitDetectionRadius : 5,
+    
+    //Boolean - Whether to show a stroke for datasets
+    datasetStroke : true,
+    
+    //Number - Pixel width of dataset stroke
+    datasetStrokeWidth : 2,
+    
+    //Boolean - Whether to fill the dataset with a colour
+    datasetFill : true,
+    
+    //String - A legend template
+    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+    
+    responsive: true,
+    
+    maintainAspectRatio: false,
+    
+};
+
+var data = {
+labels: [],
+datasets: []
+};
+
+function createXHR()
+{
+    try { return new XMLHttpRequest(); } catch(e) {}
+    try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch (e) {}
+    try { return new ActiveXObject("Msxml2.XMLHTTP.3.0"); } catch (e) {}
+    try { return new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {}
+    try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {}
+    
+    alert("XMLHttpRequest not supported");
+    return null;
+}
+
+var loadAllPrices = function(URLs, callbackMulti) {
+    var isAllCallCompleted = false;
+    var data = {};
+    
+    for (var i = 0; i < URLs.length; i++) {
+        var callback = function (xhr, URL) {
+            if (xhr.readyState == 4 && xhr.status == 200)
+            {
+                data[URL] = xhr.responseText;
+                var size = 0;
+                for (var index in data) {
+                    if (data.hasOwnProperty(index))
+                        size++;
+                }
+                if (size == URLs.length)
+                    callbackMulti(data);
+            }
+        }
+        
+        loadPrices(URLs[i], callback);
+    }
+}
+
+var loadPrices = function(URL, callback){
+    var xhr = createXHR();
+    
+    if (xhr)
+    {
+        var currentDate = new Date(Date.now());
+        var endDate = new Date();
+        endDate.setDate(currentDate.getDate()-30);
+        
+        URL += "&trim_start=" + endDate.getFullYear() + "-" + (1+endDate.getMonth()) + "-" +
+        endDate.getDate();
+        URL += "&trim_end=" + currentDate.getFullYear() + "-" + (1+currentDate.getMonth()) + "-" + currentDate.getDate();
+        
+        xhr.open("GET",URL,true);
+        xhr.send(null);
+        xhr.onreadystatechange = function(){callback(xhr, URL);};
+    }
+}
+
+var handleMultipleResponse = function(data) {
+    var prices = [];
+    var code = [];
+    for (var index in data) {
+        var parsedResponse = JSON.parse(data[index]);
+        prices.push(parsedResponse["data"]);
+        code.push(parsedResponse["code"]);
+    }
+    var pointStroke = "rgba(255,255,255,0.6)";
+    var pointHighlightFill = "#fff";
+    var pointHighlightStroke = "#fff";
+
+    for (var i = 0; i < prices.length; i++)
+    {
+        if (code[i].indexOf("AG") == 0)
+            var color = "#F3FF88";
+        else if (code[i].indexOf("AU") == 0)
+            var color = "#FF6D67";
+        else
+            var color = "#FFA859";
+        
+        var p = [];
+        var d = [];
+        for (var j = 0; j < prices[i].length; j++){
+            p.push(prices[i][j][1]);
+            d.push(prices[i][j][0]);
+
+        }
+        
+        p.reverse();
+        d.reverse();
+        
+        var dataset = {
+            label: code[i],
+            fillColor: "rgba(104, 206, 222, 0.05)",
+            strokeColor: color,
+            pointColor: color,
+            pointStrokeColor: pointStroke,
+            pointHighlightFill: pointHighlightFill,
+            pointHighlightStroke: pointHighlightStroke,
+            data: p
+        };
+        
+        window.data["datasets"].push(dataset);
+        window.data["labels"] = d;
+    }
+    
+    var ctx = document.getElementById("total-chart").getContext("2d");
+    var coinChart = new Chart(ctx).Line(window.data,options);
+    coinChart.update();
+}
+
+var handleResponse = function (xhr, URL)
+{
+    if (xhr.readyState == 4  && xhr.status == 200)
+    {
+        var parsedResponse = JSON.parse(xhr.responseText);
+        var prices = parsedResponse["data"];
+        
+        var i;
+        var d = [];
+        var l = [];
+        for (i = 0; i < prices.length; i++)
+        {
+            d.push(prices[i][1]);
+            l.push(prices[i][0]);
+        }
+        
+        d.reverse();
+        l.reverse();
+        
+        drawGraph(d,l);
+    }
+}
+
+var drawGraph = function (prices, labels)
+{
+    var pointStroke = "rgba(255,255,255,0.6)";
+    var pointHighlightFill = "#fff";
+    var pointHighlightStroke = "#fff";
+    
+    var stroke = "#FF6D67";
+    var point = "#FF6D67";
+
+    var dataset = {
+        //label: metal,
+        fillColor: "rgba(104, 206, 222, 0.05)",
+        strokeColor: stroke,
+        pointColor: point,
+        pointStrokeColor: pointStroke,
+        pointHighlightFill: pointHighlightFill,
+        pointHighlightStroke: pointHighlightStroke,
+        data: prices
+    };
+    
+    data["datasets"].push(dataset);
+    data["labels"] = labels;
+    
+    var ctx = document.getElementById("total-chart").getContext("2d");
+    var coinChart = new Chart(ctx).Line(data,options);
+    coinChart.update();
+}
 
 
 $(window).load(function() {
 
 	var path = window.location.pathname;
 	var page = path.split("/").pop();
-
-
 
 	/* * * * * * * * * * * * * *
 	 *                         *
@@ -122,12 +334,12 @@ $(window).load(function() {
 	 *        GRAPHING         *
 	 *                         *
 	 * * * * * * * * * * * * * */
+
  	// graph for wire2 page
  	var drawGraph = function(){
  		var pointStroke = "rgba(255,255,255,0.6)";
  		var pointHighlightFill = "#fff";
  		var pointHighlightStroke = "#fff";
-
  		if(page == "wire2.html") {
  			var data = {
  				labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -340,7 +552,19 @@ $(window).load(function() {
 		}
 	};
 
-	drawGraph();
+	//drawGraph();
+    if(page == "wire2.html") {
+            var urls = [
+                        'http://www.quandl.com/api/v1/datasets/WSJ/AU_EGL.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB',
+                        'http://www.quandl.com/api/v1/datasets/WSJ/AG_EIB.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB',
+                        'http://www.quandl.com/api/v1/datasets/WSJ/PL_EFP.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB'
+                        ];
+            loadAllPrices(urls, handleMultipleResponse);
+    }
+    else if(page == "wire3.html") {
+        loadPrices("http://www.quandl.com/api/v1/datasets/WSJ/AU_EGL.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB",
+                       handleResponse);
+    }
 
 	/* * * * * * * * * * * * * *
 	 *                         *
