@@ -258,58 +258,6 @@ var handleMultipleResponse = function(data) {
     coinChart.update();
 }
 
-var handleResponse = function (xhr, URL)
-{
-    if (xhr.readyState == 4  && xhr.status == 200)
-    {
-        var parsedResponse = JSON.parse(xhr.responseText);
-        var prices = parsedResponse["data"];
-        
-        var i;
-        var d = [];
-        var l = [];
-        for (i = 0; i < prices.length; i++)
-        {
-            d.push(prices[i][1]);
-            l.push(prices[i][0]);
-        }
-        
-        d.reverse();
-        l.reverse();
-        
-        drawGraph(d,l);
-    }
-}
-
-var drawGraph = function (prices, labels)
-{
-    var pointStroke = "rgba(255,255,255,0.6)";
-    var pointHighlightFill = "#fff";
-    var pointHighlightStroke = "#fff";
-    
-    var stroke = "#FF6D67";
-    var point = "#FF6D67";
-
-    var dataset = {
-        //label: metal,
-        fillColor: "rgba(104, 206, 222, 0.05)",
-        strokeColor: stroke,
-        pointColor: point,
-        pointStrokeColor: pointStroke,
-        pointHighlightFill: pointHighlightFill,
-        pointHighlightStroke: pointHighlightStroke,
-        data: prices
-    };
-    
-    data["datasets"].push(dataset);
-    data["labels"] = labels;
-    
-    var ctx = document.getElementById("total-chart").getContext("2d");
-    var coinChart = new Chart(ctx).Line(data,options);
-    coinChart.update();
-}
-
-
 $(window).load(function() {
 
 	var path = window.location.pathname;
@@ -562,8 +510,10 @@ $(window).load(function() {
             loadAllPrices(urls, handleMultipleResponse);
     }
     else if(page == "wire3.html") {
-        loadPrices("http://www.quandl.com/api/v1/datasets/WSJ/AU_EGL.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB",
-                       handleResponse);
+            var urls = [
+                        'http://www.quandl.com/api/v1/datasets/WSJ/AU_EGL.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB'
+                        ];
+            loadAllPrices(urls, handleMultipleResponse);
     }
 
 	/* * * * * * * * * * * * * *
