@@ -9,10 +9,22 @@
     <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <script src="./js/jquery-1.11.2.min.js"></script>
-    <script src="./js/velocity.min.js"></script>
+    <script src="./js/firebase.js"></script>
     <script src="./js/main.js"></script>
     <title>Login - CoinFlip</title>
+    <script>
+        var ref = new Firebase("https://enduserscoinflip.firebaseio.com");
+        
+        
+        ref.onAuth(function(authData) {
+          if (authData) {
+            console.log("Authenticated with uid:", authData.uid);
+            window.location = "wire2.html";
+          } else {
+            console.log("Client unauthenticated.")
+          }
+        });
+    </script>
 </head>
 
 <body>
@@ -27,8 +39,8 @@
         <section id="w1-left">
             <h1>COINFLIP</h1>
             <h3>Manage your coin collection with a simple app.</h3>
-            <a href="wire2.html"><span id="sign-up-button">Sign up</span></a>
-            <a href="wire2.html"><span id="log-in-button">Log in</span></a>
+            <a href="register.html"><span id="sign-up-button">Sign up</span></a>
+            <a href="login.html"><span id="log-in-button">Log in</span></a>
         </section>
 
         <section id="w1-right">

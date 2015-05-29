@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Dream Team">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="./js/firebase.js"></script>
+    <script src="./js/main.js"></script>
+    <title>Sign Up - CoinFlip</title>
+    
+    <script>
+        var ref = new Firebase("https://enduserscoinflip.firebaseio.com");
+        
+        function createUser() {
+        
+            var inputemail = document.getElementById("regemail").value;
+            var inputpassword = document.getElementById("regpassword").value;
+            
+            ref.createUser({
+              email    : inputemail,
+              password : inputpassword
+            }, function(error, authData) {
+              if (error) {
+                document.getElementById("alert").innerHTML = error;
+              } else {
+              
+                document.getElementById("alert").innerHTML = "Successfully registered with the email address: " + inputemail + "!<br>" + '<a href="login.html">Click here to log in.<svg class="icon icon-play-arrow"> <symbol id="icon-play-arrow2" viewBox="0 0 1024 1024"><title>play-arrow</title>                                 <path class="path1" d="M341.333 213.333v597.333l469.333-298.667z"></path>                                </symbol>                                <use xlink:href="#icon-play-arrow2"></use>   </svg></a>';
+                document.getElementById('register-div').style.display = 'none';
+
+              }
+            });
+        }
+    
+    </script>
+    
+</head>
+
+<body>
+    <nav>
+        COINFLIP
+    </nav>
+    <div class="mobile-nav">
+        <a href="index.html">
+            <svg class="icon icon-keyboard-arrow-left">
+                <symbol id="icon-keyboard-arrow-left" viewBox="0 0 1024 1024">
+                    <title>keyboard-arrow-left</title>
+                    <path class="path1" d="M657.707 696.96l-195.627-195.627 195.627-195.627-60.373-60.373-256 256 256 256z"></path>
+                </symbol>
+                <use xlink:href="#icon-keyboard-arrow-left"></use>
+            </svg>
+        </a>
+        SIGN UP
+    </div>
+    
+    <div class="register-nav">
+        <a href="index.html">
+            <div class="breadcrumb">
+                <svg class="icon icon-play-arrow-rev">
+                    <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
+                        <title>play-arrow</title>
+                        <path class="path1" d="M682.667 213.333v597.333l-469.333-298.667z"></path>
+                    </symbol>
+                    <use xlink:href="#icon-play-arrow"></use>
+                </svg>
+                Sign Up
+            </div>
+        </a>
+    </div>
+
+    <div class="register-div" id="register-div">
+        
+        <table>
+            <tr>
+                <td>Email address</td>
+                <td>
+                    <input type="email" placeholder="Enter email" name="email" id="regemail"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <input type="password" placeholder="Password" name="password" id="regpassword" />
+                </td>
+            </tr>
+        </table>
+        
+        <a onclick="createUser();"><span id="save">Register</span></a>
+        
+        
+
+    </div>
+    
+    <p id="alert"></p>
+
+
+
+    <script type="text/javascript">loadFooter();</script>
+</body>
+
+</html>

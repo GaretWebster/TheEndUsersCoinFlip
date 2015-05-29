@@ -9,10 +9,44 @@
     <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="./js/firebase.js"></script>
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/velocity.min.js"></script>
     <script src="./js/main.js"></script>
     <title>Gold Item - CoinFlip</title>
+    <script>
+        var ref = new Firebase("https://enduserscoinflip.firebaseio.com/users");
+        ref.onAuth(function(authData) {
+          if (authData) {
+            console.log("Authenticated with uid:", authData.uid);
+          } else {
+            window.location = "index.html";
+          }
+        });
+        
+        var itemkey = window.location.hash.substr(1);
+        
+        
+        var authData = ref.getAuth();
+        ref.child(authData.uid).child(itemkey).once("value", function(snapshot) {
+            document.getElementById('td_metal').innerHTML = snapshot.val().metal.charAt(0).toUpperCase() + snapshot.val().metal.substring(1);
+            document.getElementById('td_type').innerHTML = snapshot.val().type;
+            document.getElementById('td_purchase_date').innerHTML = snapshot.val().purchase_date;
+            document.getElementById('td_quantity').innerHTML = snapshot.val().quantity;
+            document.getElementById('td_premium').innerHTML = snapshot.val().premium;
+            document.getElementById('td_unit_price').innerHTML = snapshot.val().unit_price;
+            document.getElementById('td_percent').innerHTML = snapshot.val().percent;
+            document.getElementById('td_weight_unit_g').innerHTML = snapshot.val().weight_unit_g;
+            document.getElementById('td_gu').innerHTML = snapshot.val().gu;
+            document.getElementById('td_ozt_u').innerHTML = snapshot.val().ozt_u;
+            document.getElementById('td_total_au').innerHTML = snapshot.val().total_au;
+            document.getElementById('td_total').innerHTML = snapshot.val().total;
+          
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });       
+        
+    </script>
 </head>
 
 <body>
@@ -58,51 +92,51 @@
                     <table>
                         <tr>
                             <td>Metal</td>
-                            <td>Gold</td>
+                            <td id="td_metal"></td>
                         </tr>
                         <tr>
                             <td>Type</td>
-                            <td>US Eagle</td>
+                            <td id="td_type"></td>
                         </tr>
                         <tr>
                             <td>Purchase Date</td>
-                            <td>04 March 2015</td>
+                            <td id="td_purchase_date"></td>
                         </tr>
                         <tr>
                             <td>Qty.</td>
-                            <td>1</td>
+                            <td id="td_quantity"></td>
                         </tr>
                         <tr>
                             <td>Premium</td>
-                            <td>47.00</td>
+                            <td id="td_premium"></td>
                         </tr>
                         <tr>
                             <td>Unit Price</td>
-                            <td>1250.60</td>
+                            <td id="td_unit_price"></td>
                         </tr>
                         <tr>
                             <td>Gold %</td>
-                            <td>0.999</td>
+                            <td id="td_percent"></td>
                         </tr>
                         <tr>
                             <td>Weight/unit (g)</td>
-                            <td>1.244</td>
+                            <td id="td_weight_unit_g"></td>
                         </tr>
                         <tr>
                             <td>Gold g/u</td>
-                            <td>1.244</td>
+                            <td id="td_gu"></td>
                         </tr>
                         <tr>
                             <td>Gold ozt/u</td>
-                            <td>0.0400</td>
+                            <td id="td_ozt_u"></td>
                         </tr>
                         <tr>
                             <td>Total au (ozt)</td>
-                            <td>0.0400</td>
+                            <td id="td_total_au"></td>
                         </tr>
                         <tr>
                             <td><strong>TOTAL</strong></td>
-                            <td><strong>1199.10</strong></td>
+                            <td><strong id="td_total"></strong></td>
                         </tr>
                     </table>
                 </section>
