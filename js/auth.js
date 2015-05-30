@@ -58,9 +58,7 @@ function loginUser() {
 			document.getElementById('register-div').style.display = 'none';
 
 			window.location = "wire2.html";
-		}}, {
-		remember: "sessionOnly"
-    });
+		}});
 }
 
 function pressEnter(method) {
