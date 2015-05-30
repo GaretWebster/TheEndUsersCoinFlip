@@ -4,9 +4,9 @@
  *                             *
  * * * * * * * * * * * * * * * */
 
+
 .register-div span {
     display: block;
-    height: 55px;
     line-height: 55px;
     text-align: center;
     font-size: 1.3em;
@@ -35,7 +35,7 @@
 }
 
 .register-nav .breadcrumb {
-    margin-top: 120px;
+    padding-top: 120px;
     padding-left: 103px;
     font-size: 1.2em;
     height: 30px;
@@ -55,20 +55,19 @@
 .register-nav .breadcrumb:hover ,
 .register-nav .breadcrumb:hover svg {
     fill: #68CEDE;
-    color: #68CEDE
+    color: #68CEDE;
 }
 
 #alert {
     text-align:center;
     font-size: 1.2em;
-    height: 30px;
     line-height: 30px;
-    margin-bottom: 15px;
 }
 
 #alert a:hover,
 #alert:hover svg {
     color: #68CEDE;
+    fill: #68CEDE;
 }
 
 #alert svg {

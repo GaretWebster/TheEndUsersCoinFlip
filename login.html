@@ -82,13 +82,13 @@
             <tr>
                 <td>Email address</td>
                 <td>
-                    <input type="email" placeholder="Enter email" name="email" id="regemail"/>
+                    <input id="regemail" type="email" placeholder="Enter email" name="email" onkeydown="if (event.keyCode == 13) loginUser();" autofocus/>
                 </td>
             </tr>
             <tr>
                 <td>Password</td>
                 <td>
-                    <input type="password" placeholder="Password" name="password" id="regpassword" />
+                    <input id="regpassword" type="password" placeholder="Password" name="password" onkeydown="if (event.keyCode == 13) loginUser();"/>
                 </td>
             </tr>
         </table>
