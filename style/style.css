@@ -1028,6 +1028,33 @@ strong {
     font-family: "monster_r";
     font-weight: 700;
 }
+
+#edit-button {
+    background: #397C86;
+    border: 1px solid #151515;
+    display:block;
+    line-height:30px;
+}
+
+#edit-button:hover {
+    border: 1px solid #68CEDE;
+}
+
+
+#save-button {
+    background: #1C3A3F;
+    display:block;
+    border: 1px solid #151515;
+    line-height:30px;
+}
+
+#save-button:hover {
+    border: 1px solid #68CEDE;
+}
+
+#editable_details {
+    display:none;
+}
 /* * * * * * * * * * * * * * * *
  *                             *
  *           WIRE 5            *

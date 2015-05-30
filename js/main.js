@@ -109,6 +109,35 @@ function promptLogout() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
+
+
+/* function editItem() {
+	if(document.getElementById("edit-button")) {
+		document.getElementById("edit-button").innerHTML = "Save Item";
+		document.getElementById("edit-button").setAttribute('id', 'save-button');
+
+
+		$('td_purchase_date').editable();
+	}
+	else {
+		window.location.reload();
+	}
+
+}*/
+
+function deleteItem() {
+
+	var itemkey = window.location.hash.substr(1);
+    var authData = ref.getAuth();
+
+	dref = ref.child('users');
+	dref = dref.child(authData.uid);
+	dref = dref.child(itemkey);
+	dref.remove();
+
+	window.location = "wire3.html";
+}
+
 var options = {
     
     ///Boolean - Whether grid lines are shown across the chart
