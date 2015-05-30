@@ -9,8 +9,10 @@
     <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="./js/firebase.js"></script>
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/Chart.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>Home - CoinFlip</title>
 </head>
@@ -25,7 +27,7 @@
         <section class="coin_wrapper">
             <section class="overview-panel">
                 <section class="total-value">
-                    <div class="total-dollars">$24,249.23</div>
+                    <div class="total-dollars" id="totalvalue"><!--total value in here --></div>
                     <div class="total-change pos-change">+3.5%</div><br/>
                     <div class="total-label">My Total Coin Value</div>
                 </section>

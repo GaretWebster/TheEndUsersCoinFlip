@@ -12,41 +12,9 @@
     <script src="./js/firebase.js"></script>
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/velocity.min.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>Gold Item - CoinFlip</title>
-    <script>
-        var ref = new Firebase("https://enduserscoinflip.firebaseio.com/users");
-        ref.onAuth(function(authData) {
-          if (authData) {
-            console.log("Authenticated with uid:", authData.uid);
-          } else {
-            window.location = "index.html";
-          }
-        });
-        
-        var itemkey = window.location.hash.substr(1);
-        
-        
-        var authData = ref.getAuth();
-        ref.child(authData.uid).child(itemkey).once("value", function(snapshot) {
-            document.getElementById('td_metal').innerHTML = snapshot.val().metal.charAt(0).toUpperCase() + snapshot.val().metal.substring(1);
-            document.getElementById('td_type').innerHTML = snapshot.val().type;
-            document.getElementById('td_purchase_date').innerHTML = snapshot.val().purchase_date;
-            document.getElementById('td_quantity').innerHTML = snapshot.val().quantity;
-            document.getElementById('td_premium').innerHTML = snapshot.val().premium;
-            document.getElementById('td_unit_price').innerHTML = snapshot.val().unit_price;
-            document.getElementById('td_percent').innerHTML = snapshot.val().percent;
-            document.getElementById('td_weight_unit_g').innerHTML = snapshot.val().weight_unit_g;
-            document.getElementById('td_gu').innerHTML = snapshot.val().gu;
-            document.getElementById('td_ozt_u').innerHTML = snapshot.val().ozt_u;
-            document.getElementById('td_total_au').innerHTML = snapshot.val().total_au;
-            document.getElementById('td_total').innerHTML = snapshot.val().total;
-          
-        }, function (errorObject) {
-          console.log("The read failed: " + errorObject.code);
-        });       
-        
-    </script>
 </head>
 
 <body>

@@ -10,21 +10,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="./js/firebase.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>Login - CoinFlip</title>
-    <script>
-        var ref = new Firebase("https://enduserscoinflip.firebaseio.com");
-        
-        
-        ref.onAuth(function(authData) {
-          if (authData) {
-            console.log("Authenticated with uid:", authData.uid);
-            window.location = "wire2.html";
-          } else {
-            console.log("Client unauthenticated.")
-          }
-        });
-    </script>
 </head>
 
 <body>

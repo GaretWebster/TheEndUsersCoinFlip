@@ -88,10 +88,25 @@ function loadSideNav(selected){
 }
 
 function loadFooter(){
+	document.write("	<div id=\"overlay\">");
+	document.write("		<div>Do you want to logout?");
+	document.write("			<p><a href='#' onclick='logout()' id='sign-up-button'>Yes<\/a><\/p>");
+	document.write("			<p><a href='#' onclick='promptLogout()' id='log-in-button'>No<\/a><\/p>");
+	document.write("		<\/div>");
+	document.write("	<\/div>");
 	document.write("    <footer>");
 	document.write("        &copy; 2015 CoinFlip");
 	document.write("    <\/footer> ");
 
+}
+
+function logout() {
+	ref.unauth();
+	window.location="index.html";
+}
+function promptLogout() {
+	el = document.getElementById("overlay");
+	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
 var options = {
@@ -273,9 +288,16 @@ $(window).load(function() {
 	 	location.reload();	
 	 });
 
+	 $('.icon-cog').click(function(){
+		promptLogout();
+	 });
+
 	 $('tr').click(function(){
 	 	$(this).find('a')[0].click();
 	 });
+
+
+
 
 	/* * * * * * * * * * * * * *
 	 *                         *
@@ -561,5 +583,4 @@ $(window).load(function() {
 
 	 $(window).resize(resizer);
 
-
-	});
+});

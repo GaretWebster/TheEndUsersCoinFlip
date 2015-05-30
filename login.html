@@ -10,38 +10,9 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="./js/firebase.js"></script>
+    <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>Log In - CoinFlip</title>
-    
-    <script>
-        var ref = new Firebase("https://enduserscoinflip.firebaseio.com");
-        
-        function loginUser() {
-            var inputemail = document.getElementById("regemail").value;
-            var inputpassword = document.getElementById("regpassword").value;
-            
-            ref.authWithPassword({
-              email    : inputemail,
-              password : inputpassword
-            }, function(error, authData) {
-              if (error) {
-                document.getElementById("alert").innerHTML = error;
-              } else {
-                document.getElementById("alert").innerHTML = "Log in successful!";
-                document.getElementById('register-div').style.display = 'none';
-                
-                window.location = "wire2.html";
-              }}, {
-                remember: "sessionOnly"
-            });
-            
-
-        }
-        
-        
-        
-    </script>
-    
 </head>
 
 <body>
@@ -82,13 +53,13 @@
             <tr>
                 <td>Email address</td>
                 <td>
-                    <input id="regemail" type="email" placeholder="Enter email" name="email" onkeydown="if (event.keyCode == 13) loginUser();" autofocus/>
+                    <input id="regemail" type="email" placeholder="Enter email" name="email" onkeydown="pressEnter('login');" autofocus/>
                 </td>
             </tr>
             <tr>
                 <td>Password</td>
                 <td>
-                    <input id="regpassword" type="password" placeholder="Password" name="password" onkeydown="if (event.keyCode == 13) loginUser();"/>
+                    <input id="regpassword" type="password" placeholder="Password" name="password" onkeydown="pressEnter('login');"/>
                 </td>
             </tr>
         </table>
