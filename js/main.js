@@ -264,13 +264,6 @@ var handleMultipleResponse = function(data) {
 
     for (var i = 0; i < prices.length; i++)
     {
-        if (code[i].indexOf("AG") == 0)
-            var color = "#F3FF88";
-        else if (code[i].indexOf("AU") == 0)
-            var color = "#FF6D67";
-        else
-            var color = "#FFA859";
-        
         var p = [];
         var d = [];
         for (var j = 0; j < prices[i].length; j++){
@@ -278,6 +271,40 @@ var handleMultipleResponse = function(data) {
             d.push(prices[i][j][0]);
 
         }
+        
+        var change = (p[0] - p[1])/p[1];
+        parseFloat(change).toFixed(2);
+        
+        if (code[i].indexOf("AG") == 0)
+        {
+            var color = "#F3FF88";
+            $("#silver-market-price")[0].innerText = parseFloat(p[0]).toFixed(2);
+            $("#silver-change")[0].innerText = parseFloat(change).toFixed(2);
+            
+            if (change < 0)
+                $("#silver-change")[0].setAttribute("class", "neg-change");
+        }
+        else if (code[i].indexOf("AU") == 0)
+        {
+            var color = "#FF6D67";
+            $("#gold-market-price")[0].innerText = parseFloat(p[0]).toFixed(2);
+            $("#gold-change")[0].innerText = parseFloat(change).toFixed(2);
+            
+            if (change < 0)
+                $("#gold-change")[0].setAttribute("class", "neg-change");
+            
+        }
+        else
+        {
+            var color = "#FFA859";
+            $("#platinum-market-price")[0].innerText = parseFloat(p[0]).toFixed(2);
+            $("#platinum-change")[0].innerText = parseFloat(change).toFixed(2);
+            
+            if (change < 0)
+                $("#platinum-change")[0].setAttribute("class", "neg-change");
+
+        }
+        
         
         p.reverse();
         d.reverse();
@@ -324,8 +351,6 @@ $(window).load(function() {
 	 $('tr').click(function(){
 	 	$(this).find('a')[0].click();
 	 });
-
-
 
 
 	/* * * * * * * * * * * * * *
