@@ -58,31 +58,55 @@
                     <!-- <span id="edit-button" onclick="editItem()">Edit Item</span> -->
                     <span id="edit-button" onclick="deleteItem()">Delete Item</span> 
                 </section>
-                <section class="coin_detail">
+                                <section class="coin_detail">
                     <table>
                         <tr>
                             <td>Metal</td>
                             <td id="td_metal"> </td>
+							<td>
+                                <select id="form_metal">
+                                    <option value="gold">Gold</option>
+                                    <option value="silver">Silver</option>
+                                    <option value="platinum">Platinum</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>Type</td>
                             <td id="td_type"> </td>
+							<td>
+                                <select id="form_type">
+                                    <option selected value="us_eagle">US Eagle</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Purchase Date</td>
+                            <td>Purchase Date</td>							
                             <td id="td_purchase_date"> </td>
+							<td>
+								<input id="form_purchase_date" name="purchase_date" placeholder="New Purchase Date" /> 
+							</td>
                         </tr>
                         <tr>
                             <td>Qty.</td>
                             <td id="td_quantity"> </td>
+							<td>
+                                <input id="form_quantity" name="quantity" placeholder="New Quantity" />
+                            </td>
                         </tr>
                         <tr>
                             <td>Premium</td>
                             <td id="td_premium"> </td>
+							<td>
+                                <input id="form_premium" name="premium" placeholder="New Premium" />
+                            </td>
                         </tr>
                         <tr>
                             <td>Unit Price</td>
                             <td id="td_unit_price"> </td>
+							<td>
+                                <input id="form_unit_price" name="unit_price" placeholder="New Unit Price" />
+                            </td>
                         </tr>
                         <tr>
                             <td>Gold %</td>
