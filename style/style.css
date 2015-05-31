@@ -37,6 +37,9 @@
  *     REGISTER / LOGIN        *
  *                             *
  * * * * * * * * * * * * * * * */
+.register-div {
+    text-align:center;
+}
 
 .register-div span {
     display: block;
@@ -48,9 +51,11 @@
 }
 
 .register-div table {
+
     width: 275px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 15px;
 }
 
 .register-div tr > td {
@@ -110,6 +115,21 @@
     position: relative;
     top: 5px;
 }
+
+
+.register-button {
+    background: #397C86;
+    border: 1px solid #151515;
+    color: white;
+    text-decoration: none;
+    width: 275px;
+}
+
+.register-button:hover {
+    border: 1px solid #68CEDE;
+}
+
+
 
 /* * * * * * * * * * * * * * * *
  *                             *

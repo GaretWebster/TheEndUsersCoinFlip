@@ -24,7 +24,7 @@ ref.onAuth(function(authData) {
 });
 
 
-function createUserFacebook() {
+function authFacebook() {
     ref.authWithOAuthPopup("facebook", function(error, authData) {
         if (error) {
             console.log("Login Failed!", error);
