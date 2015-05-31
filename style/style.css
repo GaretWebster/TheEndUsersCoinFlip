@@ -23,7 +23,6 @@
     padding:15px;
     line-height: 30px;
     font-size: 1.3em;
-    line-height: 30px;
     text-align:center;
 }
 
@@ -41,20 +40,15 @@
     text-align:center;
 }
 
-.register-div span {
-    display: block;
-    text-align: center;
-    font-size: 1.3em;
-    margin-left: auto;
-    margin-right: auto;
+.register-div p {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .register-div table {
-
     width: 275px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 15px;
 }
 
 .register-div tr > td {
@@ -116,15 +110,16 @@
 }
 
 
+
 .register-button {
     background: #397C86;
     border: 1px solid #151515;
-    color: white;
-    text-decoration: none;
+    width: 275px;
+    display:inline-block;
     height: 40px;
     line-height: 40px;
+    font-size: 1.3em;
     cursor: pointer;
-    width: 275px;
 }
 
 .register-button:hover {
@@ -132,6 +127,22 @@
 }
 
 
+.registered-button {
+    background: #397C86;
+    border: 1px solid #151515;
+    color: white;
+    text-decoration: none;
+    height: 40px;
+    cursor: pointer;
+    width: 275px;
+    font-size: 1.3em;
+    display:inline-block;
+}
+
+
+.registered-button:hover {
+    border: 1px solid #68CEDE;
+}
 
 
 
