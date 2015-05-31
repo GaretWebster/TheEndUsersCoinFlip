@@ -25,13 +25,12 @@ ref.onAuth(function(authData) {
 
 
 function createUserFacebook() {
-
-    ref.authWithOAuthRedirect("facebook", function(error) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        // We'll never get here, as the page will redirect on success.
-      }
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+        if (error) {
+            console.log("Login Failed!", error);
+        } else {
+            console.log("Authenticated successfully with payload:", authData);
+        }
     });
 
 }
