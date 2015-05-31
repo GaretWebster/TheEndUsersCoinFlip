@@ -111,22 +111,59 @@ function promptLogout() {
 
 
 
-/* function editItem() {
-	if(document.getElementById("edit-button")) {
-		document.getElementById("edit-button").innerHTML = "Save Item";
-		document.getElementById("edit-button").setAttribute('id', 'save-button');
+function updateItem() {
+    var itemkey = window.location.hash.substr(1);
+    var authData = ref.getAuth();
+
+    dref = ref.child('users');
+    dref = dref.child(authData.uid);
+    dref = dref.child(itemkey);
 
 
-		$('td_purchase_date').editable();
-	}
-	else {
-		window.location.reload();
-	}
+    var input_metal = document.getElementById("form_metal").value;
+    var x = document.getElementById("form_type");
+    var input_type = x.options[x.selectedIndex].text;            
+    var input_purchase_date = document.getElementById("form_purchase_date").value;
+    var input_quantity = document.getElementById("form_quantity").value;
+    var input_premium = document.getElementById("form_premium").value;
+    var input_unit_price = document.getElementById("form_unit_price").value;
 
-}*/
+
+    if(input_metal) {
+        dref.update({
+          metal: input_metal
+        });
+    }
+    if(input_type) {
+        dref.update({
+          type: input_type
+        });
+    }
+    if(input_purchase_date) {
+        dref.update({
+          purchase_date: input_purchase_date
+        });
+    }
+    if(input_quantity) {
+        dref.update({
+          quantity: input_quantity
+        });
+    }
+    if(input_premium) {
+        dref.update({
+          premium: input_premium
+        });
+    }
+    if(input_unit_price) {
+        dref.update({
+          unit_price: input_unit_price
+        });
+    }
+    window.location = "wire3.html";
+
+}
 
 function deleteItem() {
-
 	var itemkey = window.location.hash.substr(1);
     var authData = ref.getAuth();
 
