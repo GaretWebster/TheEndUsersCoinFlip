@@ -43,7 +43,6 @@
 
 .register-div span {
     display: block;
-    line-height: 55px;
     text-align: center;
     font-size: 1.3em;
     margin-left: auto;
@@ -122,12 +121,17 @@
     border: 1px solid #151515;
     color: white;
     text-decoration: none;
+    height: 40px;
+    line-height: 40px;
+
     width: 275px;
 }
 
 .register-button:hover {
     border: 1px solid #68CEDE;
 }
+
+
 
 
 

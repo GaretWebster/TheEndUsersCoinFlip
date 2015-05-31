@@ -48,7 +48,9 @@
     </div>
 
     <div class="register-div" id="register-div">
-        <a onclick="authFacebook();"><span class="register-button">Login with Facebook</span></a>
+        <a onclick="authProvider("facebook");"><span class="register-button">Login with Facebook</span></a>
+        <a onclick="authProvider("google");"><span class="register-button">Login with Google</span></a>
+
         <br>-or-<br>
         <table>
             <tr>
@@ -65,7 +67,7 @@
             </tr>
         </table>
         
-        <a onclick="loginUser();"><span id="save">Log In</span></a>
+        <a onclick="loginUser();"><span class="register-button">Log In</span></a>
         
         
 

@@ -24,8 +24,8 @@ ref.onAuth(function(authData) {
 });
 
 
-function authFacebook() {
-    ref.authWithOAuthPopup("facebook", function(error, authData) {
+function authProvider(provider) {
+    ref.authWithOAuthPopup(provider, function(error, authData) {
         if (error) {
             console.log("Login Failed!", error);
         } else {
