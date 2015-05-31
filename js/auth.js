@@ -34,7 +34,7 @@ function authFacebook() {
     });
 }
 
-function authProvider() {
+function authGoogle() {
     ref.authWithOAuthPopup("google", function(error, authData) {
         if (error) {
             console.log("Login Failed!", error);
