@@ -987,6 +987,7 @@ a:visited {
     width: 275px;
     margin-left: auto;
     margin-right: auto;
+    table-layout: fixed;
 }
 
 .coin_detail tr > td {
@@ -996,11 +997,15 @@ a:visited {
 .coin_detail tr > td:first-child {
     text-align: right;
     padding-right: 15px;
+    width: 50%;
+    max-width:50%;
 }
 
 .coin_detail tr > td:nth-child(2) {
     text-align: left;
     color: #68CEDE;
+    width: 50%;
+    word-wrap: break-word;
 }
 
 .img_box {

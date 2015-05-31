@@ -24,6 +24,17 @@ ref.onAuth(function(authData) {
 });
 
 
+function createUserFacebook() {
+
+    ref.authWithOAuthRedirect("facebook", function(error) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        // We'll never get here, as the page will redirect on success.
+      }
+    });
+
+}
 
 function createUser() {
         
