@@ -19,5 +19,4 @@ Gold/Silver/Platinum Dataset - Quandl
 	Eagle, Silver Engelhard industrial bullion, and Platinum Engelhard fabricated 
 	products. The prices of the past 30 days are displayed from these sources.
 
-Obstacles - 
-	...any problems with the app and why?
+Obstacles - After implementing authentication some of our members had trouble getting logged in to view changes to the app. We also had some problems with the graphs not appearing for some users.
