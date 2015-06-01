@@ -1,6 +1,6 @@
 ===============================================================================
-                             CSE134B DREAM TEAM
-                               COINFLIP - HW3
+                             CSE134B The End Users
+                               COINFLIP - HW4
 ===============================================================================
 
 # # # # # # # # # # # # # # # 
@@ -165,5 +165,5 @@ application for managing your entire coin collection! Feel free to
 contact us with any feedback, comments, suggestions, or concerns.
 
 Best,
-CSE134B Dream Team
+CSE134B The End Users
 
