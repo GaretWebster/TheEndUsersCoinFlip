@@ -16,6 +16,5 @@ Quandl
 
 We used Quandl to get realtime data for the current prices of gold, silver, and platinium.
 
-Best,
 CSE134B The End Users
 
