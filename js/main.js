@@ -75,7 +75,7 @@ function loadSideNav(selected){
 	document.write("            <figcaption>My Silver<\/figcaption>");
 	document.write("        <\/figure>       ");
 	document.write("        <\/a> ");
-	document.write("        <a href=\"wire3.html\">");
+	document.write("        <a href=\"wire7.html\">");
 	if(selected == 3)
 		document.write("        <figure class='nav-selected'>");
 	else
@@ -697,6 +697,92 @@ $(window).load(function() {
 			var coinChart = new Chart(ctx).Line(data,options);
 			coinChart.update();
 		}
+		
+		else if(page =="wire7.html"){
+			var data = {
+				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				datasets: [
+				{
+					label: "Platinum Total",
+					fillColor: "rgba(104, 206, 222, 0.05)",
+					strokeColor: "#FF6D67",
+					pointColor: "#FF6D67",
+					pointStrokeColor: pointStroke,
+					pointHighlightFill: pointHighlightFill,
+					pointHighlightStroke: pointHighlightStroke,
+					data: [700,820,700,800,730,950,900]
+				},
+				{
+					label: "1oz Silver",
+					fillColor: "rgba(104, 206, 222, 0.05)",
+					strokeColor: "#9FFF98",
+					pointColor: "#9FFF98",
+					pointStrokeColor: pointStroke,
+					pointHighlightFill: pointHighlightFill,
+					pointHighlightStroke: pointHighlightStroke,
+					data: [100, 110, 120, 90, 102, 135, 115]
+				}
+				]
+			};
+
+			var options = {
+
+			    ///Boolean - Whether grid lines are shown across the chart
+			    scaleShowGridLines : true,
+
+			    //String - Colour of the grid lines
+			    scaleGridLineColor : "rgba(104, 206, 222, 0.1)",
+
+			    //Number - Width of the grid lines
+			    scaleGridLineWidth : 1,
+
+			    //Boolean - Whether to show horizontal lines (except X axis)
+			    scaleShowHorizontalLines: true,
+
+			    //Boolean - Whether to show vertical lines (except Y axis)
+			    scaleShowVerticalLines: true,
+
+			    //Boolean - Whether the line is curved between points
+			    bezierCurve : true,
+
+			    //Number - Tension of the bezier curve between points
+			    bezierCurveTension : 0.4,
+
+			    //Boolean - Whether to show a dot for each point
+			    pointDot : true,
+
+			    //Number - Radius of each point dot in pixels
+			    pointDotRadius : 4,
+
+			    //Number - Pixel width of point dot stroke
+			    pointDotStrokeWidth : 1,
+
+			    //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+			    pointHitDetectionRadius : 20,
+
+			    //Boolean - Whether to show a stroke for datasets
+			    datasetStroke : true,
+
+			    //Number - Pixel width of dataset stroke
+			    datasetStrokeWidth : 2,
+
+			    //Boolean - Whether to fill the dataset with a colour
+			    datasetFill : true,
+
+			    //String - A legend template
+			    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+
+			    responsive: true,
+
+			    maintainAspectRatio: false,
+
+
+			};
+
+			var ctx = document.getElementById("total-chart").getContext("2d");
+			var coinChart = new Chart(ctx).Line(data,options);
+			coinChart.update();
+		}
 	};
 
 	//drawGraph();
@@ -718,6 +804,13 @@ $(window).load(function() {
 	else if(page == "wire6.html") {
             var urls = [
                         'http://www.quandl.com/api/v1/datasets/WSJ/AG_EIB.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB'
+                        ];
+            loadAllPrices(urls, handleMultipleResponse);
+    }
+	
+	else if(page == "wire7.html") {
+            var urls = [
+                        'http://www.quandl.com/api/v1/datasets/WSJ/PL_EFP.json?auth_token=JJ4C4n7yWSzF3ZWzu3AB'
                         ];
             loadAllPrices(urls, handleMultipleResponse);
     }
