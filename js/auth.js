@@ -178,7 +178,7 @@ if(page == "wire4.html") {
       console.log("The read failed: " + errorObject.code);
     });    
 }
-else if(page == "wire2.html" || page == "wire3.html") {
+else if(page == "wire2.html" || page == "wire3.html" || page == "wire6.html" || page == "wire7.html") {
 
 
 	var authData = ref.getAuth();
@@ -219,6 +219,61 @@ else if(page == "wire2.html" || page == "wire3.html") {
                 totalvalue += +entry.total;
                 
             }
+			
+			if(page == "wire6.html" && entry.metal == "silver") {
+                var tableRef = document.getElementById('silver_table').getElementsByTagName('tbody')[0];
+
+                var row = tableRef.insertRow(-1);
+                row.setAttribute('id', childSnapshot.key());
+                var image = row.insertCell(-1);
+                image.setAttribute('class', "stack_img_col");
+                var item = row.insertCell(-1);
+                var qty = row.insertCell(-1);
+                var weight = row.insertCell(-1);
+                var percent = row.insertCell(-1);
+                var value = row.insertCell(-1);
+
+                image.innerHTML = '<div class="coin_mini"></div>';
+                item.innerHTML = entry.type;
+                qty.innerHTML = entry.quantity;
+                weight.innerHTML = entry.weight_unit_g;
+                percent.innerHTML = entry.percent;
+                value.innerHTML = entry.total;
+                
+                // add the entry's key to the link
+                row.setAttribute('onclick', "window.document.location='wire4.html#" + childSnapshot.key()+"'");
+                
+                totalvalue += +entry.total;
+                
+            }
+			
+			if(page == "wire7.html" && entry.metal == "platinum") {
+                var tableRef = document.getElementById('platinum_table').getElementsByTagName('tbody')[0];
+
+                var row = tableRef.insertRow(-1);
+                row.setAttribute('id', childSnapshot.key());
+                var image = row.insertCell(-1);
+                image.setAttribute('class', "stack_img_col");
+                var item = row.insertCell(-1);
+                var qty = row.insertCell(-1);
+                var weight = row.insertCell(-1);
+                var percent = row.insertCell(-1);
+                var value = row.insertCell(-1);
+
+                image.innerHTML = '<div class="coin_mini"></div>';
+                item.innerHTML = entry.type;
+                qty.innerHTML = entry.quantity;
+                weight.innerHTML = entry.weight_unit_g;
+                percent.innerHTML = entry.percent;
+                value.innerHTML = entry.total;
+                
+                // add the entry's key to the link
+                row.setAttribute('onclick', "window.document.location='wire4.html#" + childSnapshot.key()+"'");
+                
+                totalvalue += +entry.total;
+                
+            }
+			
             else if(page == "wire2.html") {
             	totalvalue += +entry.total;
             }
