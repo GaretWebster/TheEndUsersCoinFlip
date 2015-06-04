@@ -13,6 +13,10 @@
     <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>Login - CoinFlip</title>
+    
+    <!-- start Mixpanel -->
+    <script src="./js/mixpanel.js"></script><!-- end Mixpanel -->
+    
 </head>
 
 <body>
@@ -43,6 +47,7 @@
     </div>
 
     <script type="text/javascript">loadFooter();</script>
+    <script type="text/javascript">mixpanel.track("Main Page Visit");</script>
 </body>
 
 </html>
