@@ -50,6 +50,8 @@ function createUser() {
     var inputemail = document.getElementById("regemail").value;
     var inputpassword = document.getElementById("regpassword").value;
     
+    mixpanel.track("Register", {"User": inputemail});
+    
     ref.createUser({
     	email    : inputemail,
     	password : inputpassword
@@ -67,6 +69,8 @@ function loginUser() {
 	var inputemail = document.getElementById("regemail").value;
     var inputpassword = document.getElementById("regpassword").value;
     
+    mixpanel.track("Log in", {"User": inputemail});
+
     ref.authWithPassword({
 		email    : inputemail,
 		password : inputpassword
@@ -113,7 +117,7 @@ function saveToStack() {
         var input_quantity = document.getElementById("form_quantity").value;
         var input_premium = document.getElementById("form_premium").value;
         var input_unit_price = document.getElementById("form_unit_price").value;
-
+        
         if(!input_purchase_date) {
             alert("Please enter a purchase date!");
         }
@@ -127,6 +131,12 @@ function saveToStack() {
             alert("Please enter a unit price!");
         }
         else {
+            mixpanel.track("Save to Stack", {"User": authData.uid, "Metal": input_metal,
+                           "Type" : input_type,
+                           "Purchase Date" : input_purchase_date,
+                           "Quantity": input_quantity,
+                           "Premium": input_premium,
+                           "Unit Price": input_unit_price});
             ref.child("users").child(authData.uid).push({
                 metal: input_metal,
                 type: input_type,
