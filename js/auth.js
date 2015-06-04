@@ -142,7 +142,12 @@ function saveToStack() {
                 total: "1199.10"
             });  
         
-            window.location = "wire3.html";
+            if(input_metal == "gold")
+				window.location = "wire3.html";
+			else if(input_metal == "silver")
+				window.location = "wire6.html";
+			else if(input_metal == "platinum")
+				window.location = "wire7.html";
         }
     }            
 }

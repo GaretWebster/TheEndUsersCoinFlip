@@ -159,7 +159,12 @@ function updateItem() {
           unit_price: input_unit_price
         });
     }
-    window.location = "wire3.html";
+	if(input_metal == "gold")
+		window.location = "wire3.html";
+	else if(input_metal == "silver")
+		window.location = "wire6.html";
+	else if(input_metal == "platinum")
+		window.location = "wire7.html";
 
 }
 
@@ -172,7 +177,7 @@ function deleteItem() {
 	dref = dref.child(itemkey);
 	dref.remove();
 
-	window.location = "wire3.html";
+	window.location = "wire2.html";
 }
 
 var options = {
