@@ -104,19 +104,47 @@ function pressEnter(method) {
 }
 
 
-function updateAccount() {
-    var new_email = document.getElementById("user_email").value;
-    var new_password = document.getElementById("user_password").value;
+function updateEmail() {
+    var authData = ref.getAuth();
+
+    var new_email = document.getElementById("e_user_email").value;
+    var old_password = document.getElementById("e_user_password").value;
 
     ref.changeEmail({
-        oldEmail : "bobtony@firebase.com",
-        newEmail : "bobtony@google.com",
-        password : "correcthorsebatterystaple"
+        oldEmail : authData.password.email,
+        newEmail : new_email,
+        password : old_password
     }, function(error) {
         if (error === null) {
+            document.getElementById("e_update_alert").innerHTML = "Success!";
             console.log("Email changed successfully");
         } else {
+            document.getElementById("e_update_alert").innerHTML = error;
             console.log("Error changing email:", error);
+        }
+    });
+}
+
+
+function updatePassword() {
+    var authData = ref.getAuth();
+
+    var old_password = document.getElementById("p_user_password").value;
+    var new_password = document.getElementById("p_user_new_password").value;
+
+
+    ref.changePassword({
+        email       : authData.password.email,
+        oldPassword : old_password,
+        newPassword : new_password
+    }, function(error) {
+        if (error === null) {
+            document.getElementById("p_update_alert").innerHTML = "Success!";
+            console.log("Password changed successfully");
+        } else {
+            document.getElementById("p_update_alert").innerHTML = error;
+
+            console.log("Error changing password:", error);
         }
     });
 

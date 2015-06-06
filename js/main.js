@@ -91,13 +91,20 @@ function loadFooter(){
 	document.write("	<div id=\"overlay\">");
 	document.write("		<div>");
     document.write("            <p><a href='#' onclick='promptLogout()'><span id='log-in-button'>Close<\/span><\/a><\/p>");
-    document.write("            <section>Change your email/password:");
+    document.write("            <section><h3>Change your email:<\/h3>");
     document.write("                <table>");
-    document.write("                    <tr><td>Email address<\/td><td><input id='user_email' placeholder='enter email'><\/td><\/tr>");
-    document.write("                    <tr><td>Current Password<\/td><td><input id='user_password' placeholder='enter old password'><\/td><\/tr>");
-    document.write("                    <tr><td>New Password<\/td><td><input id='user_new_password' placeholder='enter new password'><\/td><\/tr>");
+    document.write("                    <tr><td>Email address<\/td><td><input id='e_user_email' placeholder='enter email'><\/td><\/tr>");
+    document.write("                    <tr><td>Current Password<\/td><td><input id='e_user_password' placeholder='enter old password'><\/td><\/tr>");
     document.write("                <\/table>");
-    document.write("                <p><a id='log-in-button' style='cursor: pointer;' onclick='updateAccount()'>Update<\/a><\/p>");
+    document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updateEmail()'>Update Email<\/a><\/p>");
+    document.write("                <p id='e_update_alert'><\/p>");
+    document.write("                <h3>Change your password:<\/h3>");
+    document.write("                <table>");
+    document.write("                    <tr><td>Current Password<\/td><td><input id='p_user_password' placeholder='enter old password'><\/td><\/tr>");
+    document.write("                    <tr><td>New Password<\/td><td><input id='p_user_new_password' placeholder='enter new password'><\/td><\/tr>");
+    document.write("                <\/table>");
+    document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updatePassword()'>Update Password<\/a><\/p>");
+    document.write("                <p id='p_update_alert'><\/p>");
     document.write("            <\/section>");
 	document.write("			<p><a href='#' onclick='logout()'><span id='log-in-button'>Logout<\/span><\/a><\/p>");
 	document.write("		<\/div>");
@@ -118,7 +125,7 @@ function promptLogout() {
 }
 function loadInfo() {
     var authData = ref.getAuth();
-    document.getElementById("user_email").value = authData.password.email;
+    document.getElementById("e_user_email").value = authData.password.email;
 }
 
 
