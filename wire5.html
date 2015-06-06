@@ -13,6 +13,8 @@
     <script src="./js/jquery-1.11.2.min.js"></script>
     <script src="./js/velocity.min.js"></script>
     <script src="./js/mixpanel.js"></script>
+    <script src="./js/spin.min.js"></script>
+    <script src="./js/sha256.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/main.js"></script>
     <title>New Item - CoinFlip</title>
@@ -53,9 +55,11 @@
                     </div>
                 </a>
                 <section class="coin_image">
-                    <div class="img_box">
-                        <div class="img_circle"></div>
+                    <div class="img_box" id="img_box">
+                        <div class="img_circle" id="img_circle"></div>
                     </div>
+                    <input type="file" accept="image/*" capture="camera" id="file-upload">
+                    <div id="spin"></div>
                 </section>
                 <section class="coin_detail">
                     <table>

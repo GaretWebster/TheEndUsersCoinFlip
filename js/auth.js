@@ -1,5 +1,6 @@
-var ref = new Firebase("https://enduserscoinflip.firebaseio.com");
-
+var ref = new Firebase("https://enduserscoinflip.firebaseio.com/");
+var path = window.location.pathname;
+var page = path.split("/").pop();
 
 ref.onAuth(function(authData) {
 	var pathname = window.location.pathname;
@@ -110,6 +111,8 @@ function saveToStack() {
     var authData = ref.getAuth();
 
     if (authData) {
+        var idx = window.location.href.indexOf('#');
+        var input_img_hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
         var input_metal = document.getElementById("form_metal").value;
         var x = document.getElementById("form_type");
         var input_type = x.options[x.selectedIndex].text;            
@@ -137,7 +140,9 @@ function saveToStack() {
                            "Quantity": input_quantity,
                            "Premium": input_premium,
                            "Unit Price": input_unit_price});
+
             ref.child("users").child(authData.uid).push({
+                img_hash: input_img_hash,
                 metal: input_metal,
                 type: input_type,
                 purchase_date: input_purchase_date,
@@ -165,17 +170,24 @@ function saveToStack() {
 
 
 window.onload = function() {
-
-var path = window.location.pathname;
-var page = path.split("/").pop();
-
-
 if(page == "wire4.html") {
 	var itemkey = window.location.hash.substr(1);
     
     var authData = ref.getAuth();
     qref = ref.child("users");
     qref.child(authData.uid).child(itemkey).once("value", function(snapshot) {
+
+        var f = new Firebase(ref + '/pano/' + snapshot.val().img_hash + '/filePayload');
+        f.once('value', function(snap) {
+            var payload = snap.val();
+            if (payload != null) {
+                document.getElementById("img_circle").style.display = "none";
+                document.getElementById("img_box").style.backgroundImage = "url(\'" + payload + "\')";
+            }
+
+        });
+
+
         document.getElementById('td_metal').innerHTML = snapshot.val().metal.charAt(0).toUpperCase() + snapshot.val().metal.substring(1);
         document.getElementById('td_type').innerHTML = snapshot.val().type;
         document.getElementById('td_purchase_date').innerHTML = snapshot.val().purchase_date;
@@ -208,9 +220,8 @@ else if(page == "wire2.html" || page == "wire3.html" || page == "wire6.html" || 
           
             var entry = childSnapshot.val()
             
-            if(page == "wire3.html" && entry.metal == "gold") {
-                var tableRef = document.getElementById('gold_table').getElementsByTagName('tbody')[0];
-
+            if((page == "wire3.html" && entry.metal=="gold") || (page == "wire6.html" && entry.metal=="silver") || (page == "wire7.html" && entry.metal=="platinum")) {
+                var tableRef = document.getElementById('metal_table').getElementsByTagName('tbody')[0];
                 var row = tableRef.insertRow(-1);
                 row.setAttribute('id', childSnapshot.key());
                 var image = row.insertCell(-1);
@@ -220,6 +231,18 @@ else if(page == "wire2.html" || page == "wire3.html" || page == "wire6.html" || 
                 var weight = row.insertCell(-1);
                 var percent = row.insertCell(-1);
                 var value = row.insertCell(-1);
+
+                var f = new Firebase(ref + '/pano/' + entry.img_hash + '/filePayload');
+                f.once('value', function(snap) {
+                    var payload = snap.val();
+                    if (payload != null) {
+                        image.innerHTML = '<div class="coin_mini" style="background-image:url('+ payload + ');background-size:100% 100%;"></div>';
+
+                    }
+                    else {
+                        image.innerHTML = '<div class="coin_mini"></div>';
+                    }
+                });
 
                 image.innerHTML = '<div class="coin_mini"></div>';
                 item.innerHTML = entry.type;
@@ -234,61 +257,6 @@ else if(page == "wire2.html" || page == "wire3.html" || page == "wire6.html" || 
                 totalvalue += +entry.total;
                 
             }
-			
-			if(page == "wire6.html" && entry.metal == "silver") {
-                var tableRef = document.getElementById('silver_table').getElementsByTagName('tbody')[0];
-
-                var row = tableRef.insertRow(-1);
-                row.setAttribute('id', childSnapshot.key());
-                var image = row.insertCell(-1);
-                image.setAttribute('class', "stack_img_col");
-                var item = row.insertCell(-1);
-                var qty = row.insertCell(-1);
-                var weight = row.insertCell(-1);
-                var percent = row.insertCell(-1);
-                var value = row.insertCell(-1);
-
-                image.innerHTML = '<div class="coin_mini"></div>';
-                item.innerHTML = entry.type;
-                qty.innerHTML = entry.quantity;
-                weight.innerHTML = entry.weight_unit_g;
-                percent.innerHTML = entry.percent;
-                value.innerHTML = entry.total;
-                
-                // add the entry's key to the link
-                row.setAttribute('onclick', "window.document.location='wire4.html#" + childSnapshot.key()+"'");
-                
-                totalvalue += +entry.total;
-                
-            }
-			
-			if(page == "wire7.html" && entry.metal == "platinum") {
-                var tableRef = document.getElementById('platinum_table').getElementsByTagName('tbody')[0];
-
-                var row = tableRef.insertRow(-1);
-                row.setAttribute('id', childSnapshot.key());
-                var image = row.insertCell(-1);
-                image.setAttribute('class', "stack_img_col");
-                var item = row.insertCell(-1);
-                var qty = row.insertCell(-1);
-                var weight = row.insertCell(-1);
-                var percent = row.insertCell(-1);
-                var value = row.insertCell(-1);
-
-                image.innerHTML = '<div class="coin_mini"></div>';
-                item.innerHTML = entry.type;
-                qty.innerHTML = entry.quantity;
-                weight.innerHTML = entry.weight_unit_g;
-                percent.innerHTML = entry.percent;
-                value.innerHTML = entry.total;
-                
-                // add the entry's key to the link
-                row.setAttribute('onclick', "window.document.location='wire4.html#" + childSnapshot.key()+"'");
-                
-                totalvalue += +entry.total;
-                
-            }
-			
             else if(page == "wire2.html") {
             	totalvalue += +entry.total;
             }
@@ -303,3 +271,74 @@ else if(page == "wire2.html" || page == "wire3.html" || page == "wire6.html" || 
     });  
 }};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(page == "wire5.html") {
+
+
+    var spinner = new Spinner({color: '#ddd'});
+    var firebaseRef = 'https://enduserscoinflip.firebaseio.com/';
+
+
+    function handleFileSelect(evt) {
+        var f = evt.target.files[0];
+        var reader = new FileReader();
+        reader.onload = (function(theFile) {
+            return function(e) {
+                var filePayload = e.target.result;
+                // Generate a location that can't be guessed using the file's contents and a random number
+                var hash = CryptoJS.SHA256(Math.random() + CryptoJS.SHA256(filePayload));
+                var f = new Firebase(firebaseRef + 'pano/' + hash + '/filePayload');
+                spinner.spin(document.getElementById('spin'));
+                // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
+                f.set(filePayload, function() { 
+                    spinner.stop();
+                    console.log(e.target.result);
+                    document.getElementById("img_circle").style.display = "none";
+                    document.getElementById("img_box").style.backgroundImage = "url(\'" + e.target.result + "\')";
+                    // Update the location bar so the URL can be shared with others
+                    window.location.hash = hash;
+                });
+            };
+        })(f);
+        reader.readAsDataURL(f);
+    }
+
+    $(function() {
+        $('#spin').append(spinner);
+
+        var idx = window.location.href.indexOf('#');
+        var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
+        if (hash === '') {
+            document.getElementById("file-upload").addEventListener('change', handleFileSelect, false);
+        }
+        else {
+            // A hash was passed in, so let's retrieve and render it.
+            spinner.spin(document.getElementById('spin'));
+            var f = new Firebase(firebaseRef + '/pano/' + hash + '/filePayload');
+            f.once('value', function(snap) {
+                var payload = snap.val();
+                if (payload != null) {
+                    document.getElementById("img_circle").style.display = "none";
+                    document.getElementById("img_box").style.backgroundImage = "url(\'" + payload + "\')";
+                }
+                else {
+                    $('#body').append("Not found");
+                }
+                spinner.stop();
+            });
+        }
+    });
+    
+}
