@@ -89,9 +89,17 @@ function loadSideNav(selected){
 
 function loadFooter(){
 	document.write("	<div id=\"overlay\">");
-	document.write("		<div>Do you want to logout?");
-	document.write("			<p><a href='#' onclick='logout()' id='sign-up-button'>Yes<\/a><\/p>");
-	document.write("			<p><a href='#' onclick='promptLogout()' id='log-in-button'>No<\/a><\/p>");
+	document.write("		<div>");
+    document.write("            <p><a href='#' onclick='promptLogout()'><span id='log-in-button'>Close<\/span><\/a><\/p>");
+    document.write("            <section>Change your email/password:");
+    document.write("                <table>");
+    document.write("                    <tr><td>Email address<\/td><td><input id='user_email' placeholder='enter email'><\/td><\/tr>");
+    document.write("                    <tr><td>Current Password<\/td><td><input id='user_password' placeholder='enter old password'><\/td><\/tr>");
+    document.write("                    <tr><td>New Password<\/td><td><input id='user_new_password' placeholder='enter new password'><\/td><\/tr>");
+    document.write("                <\/table>");
+    document.write("                <p><a id='log-in-button' style='cursor: pointer;' onclick='updateAccount()'>Update<\/a><\/p>");
+    document.write("            <\/section>");
+	document.write("			<p><a href='#' onclick='logout()'><span id='log-in-button'>Logout<\/span><\/a><\/p>");
 	document.write("		<\/div>");
 	document.write("	<\/div>");
 	document.write("    <footer>");
@@ -107,6 +115,10 @@ function logout() {
 function promptLogout() {
 	el = document.getElementById("overlay");
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
+function loadInfo() {
+    var authData = ref.getAuth();
+    document.getElementById("user_email").value = authData.password.email;
 }
 
 
@@ -387,6 +399,7 @@ $(window).load(function() {
 	 });
 
 	 $('.icon-cog').click(function(){
+        loadInfo();
 		promptLogout();
 	 });
 

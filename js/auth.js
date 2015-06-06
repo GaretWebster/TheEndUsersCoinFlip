@@ -104,7 +104,23 @@ function pressEnter(method) {
 }
 
 
+function updateAccount() {
+    var new_email = document.getElementById("user_email").value;
+    var new_password = document.getElementById("user_password").value;
 
+    ref.changeEmail({
+        oldEmail : "bobtony@firebase.com",
+        newEmail : "bobtony@google.com",
+        password : "correcthorsebatterystaple"
+    }, function(error) {
+        if (error === null) {
+            console.log("Email changed successfully");
+        } else {
+            console.log("Error changing email:", error);
+        }
+    });
+
+}
 
 
 function saveToStack() {
