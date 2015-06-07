@@ -420,10 +420,10 @@ $(window).load(function() {
 	 });
 
 	 $('.icon-cog').click(function(){
-        loadInfo();
         if(authprovider == "password") {
-    		promptLogout();
+            loadInfo();
         }
+		promptLogout();
 	 });
 
 
