@@ -109,10 +109,10 @@ function loadFooter(){
         document.write("                <p id='p_update_alert'><\/p>");
     }
     else if(authprovider == "Facebook") {
-        document.write("               <h3>You are logged in through Facebook.<\/h3> ");
+        document.write("               <h3>Hi, " + authData.facebook.displayName + ". You are logged in through Facebook.<\/h3> ");
     }
     else if(authprovider == "Google") {
-        document.write("               <h3>You are logged in through Google.<\/h3> ");
+        document.write("               <h3>Hi, " + authData.google.displayName + ". You are logged in through Google.<\/h3> ");
     }
     document.write("            <\/section>");
 	document.write("			<p><a href='#' onclick='logout()'><span id='log-in-button'>Logout<\/span><\/a><\/p>");
