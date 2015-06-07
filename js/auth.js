@@ -198,7 +198,7 @@ function saveToStack() {
                 gu: "1.244",
                 ozt_u: "0.0400",
                 total_au: "0.0400",
-                total: "1199.10"
+                total:  input_quantity * input_unit_price * .999 + parseInt(input_premium) 
             });  
         
             if(input_metal == "gold")
