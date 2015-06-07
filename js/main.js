@@ -421,7 +421,9 @@ $(window).load(function() {
 
 	 $('.icon-cog').click(function(){
         loadInfo();
-		promptLogout();
+        if(authprovider == "password") {
+    		promptLogout();
+        }
 	 });
 
 
