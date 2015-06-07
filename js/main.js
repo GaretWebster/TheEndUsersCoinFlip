@@ -91,20 +91,29 @@ function loadFooter(){
 	document.write("	<div id=\"overlay\">");
 	document.write("		<div>");
     document.write("            <p><a href='#' onclick='promptLogout()'><span id='log-in-button'>Close<\/span><\/a><\/p>");
-    document.write("            <section><h3>Change your email:<\/h3>");
-    document.write("                <table>");
-    document.write("                    <tr><td>Email address<\/td><td><input id='e_user_email' placeholder='enter email'><\/td><\/tr>");
-    document.write("                    <tr><td>Current Password<\/td><td><input id='e_user_password' placeholder='enter old password'><\/td><\/tr>");
-    document.write("                <\/table>");
-    document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updateEmail()'>Update Email<\/a><\/p>");
-    document.write("                <p id='e_update_alert'><\/p>");
-    document.write("                <h3>Change your password:<\/h3>");
-    document.write("                <table>");
-    document.write("                    <tr><td>Current Password<\/td><td><input id='p_user_password' placeholder='enter old password'><\/td><\/tr>");
-    document.write("                    <tr><td>New Password<\/td><td><input id='p_user_new_password' placeholder='enter new password'><\/td><\/tr>");
-    document.write("                <\/table>");
-    document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updatePassword()'>Update Password<\/a><\/p>");
-    document.write("                <p id='p_update_alert'><\/p>");
+    document.write("            <section>");
+    if(authprovider == "password") {
+        document.write("                <h3>Change your email:<\/h3>");
+        document.write("                <table>");
+        document.write("                    <tr><td>Email address<\/td><td><input id='e_user_email' placeholder='enter email'><\/td><\/tr>");
+        document.write("                    <tr><td>Current Password<\/td><td><input id='e_user_password' placeholder='enter old password'><\/td><\/tr>");
+        document.write("                <\/table>");
+        document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updateEmail()'>Update Email<\/a><\/p>");
+        document.write("                <p id='e_update_alert'><\/p>");
+        document.write("                <h3>Change your password:<\/h3>");
+        document.write("                <table>");
+        document.write("                    <tr><td>Current Password<\/td><td><input id='p_user_password' placeholder='enter old password'><\/td><\/tr>");
+        document.write("                    <tr><td>New Password<\/td><td><input id='p_user_new_password' placeholder='enter new password'><\/td><\/tr>");
+        document.write("                <\/table>");
+        document.write("                <p><a id='log-in-button' style='cursor:pointer;' onclick='updatePassword()'>Update Password<\/a><\/p>");
+        document.write("                <p id='p_update_alert'><\/p>");
+    }
+    else if(authprovider == "Facebook") {
+        document.write("               <h3>You are logged in through Facebook.<\/h3> ");
+    }
+    else if(authprovider == "Google") {
+        document.write("               <h3>You are logged in through Google.<\/h3> ");
+    }
     document.write("            <\/section>");
 	document.write("			<p><a href='#' onclick='logout()'><span id='log-in-button'>Logout<\/span><\/a><\/p>");
 	document.write("		<\/div>");
@@ -130,9 +139,8 @@ function loadInfo() {
     document.getElementById("p_user_new_password").value = "";
     document.getElementById("e_update_alert").innerHTML = "";
     document.getElementById("p_update_alert").value = "";
-
-
 }
+
 
 
 
