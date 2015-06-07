@@ -2,6 +2,8 @@ var ref = new Firebase("https://enduserscoinflip.firebaseio.com/");
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
+var old_email = ref.getAuth().password.email;
+
 ref.onAuth(function(authData) {
 	var pathname = window.location.pathname;
 	var p = pathname.split("/").pop();
@@ -105,18 +107,18 @@ function pressEnter(method) {
 
 
 function updateEmail() {
-    var authData = ref.getAuth();
 
     var new_email = document.getElementById("e_user_email").value;
     var old_password = document.getElementById("e_user_password").value;
 
     ref.changeEmail({
-        oldEmail : authData.password.email,
+        oldEmail : old_email,
         newEmail : new_email,
         password : old_password
     }, function(error) {
         if (error === null) {
             document.getElementById("e_update_alert").innerHTML = "Success!";
+            old_email = new_email;
             console.log("Email changed successfully");
         } else {
             document.getElementById("e_update_alert").innerHTML = error;
@@ -127,14 +129,13 @@ function updateEmail() {
 
 
 function updatePassword() {
-    var authData = ref.getAuth();
 
     var old_password = document.getElementById("p_user_password").value;
     var new_password = document.getElementById("p_user_new_password").value;
 
 
     ref.changePassword({
-        email       : authData.password.email,
+        email       : old_email,
         oldPassword : old_password,
         newPassword : new_password
     }, function(error) {
@@ -198,7 +199,7 @@ function saveToStack() {
                 gu: "1.244",
                 ozt_u: "0.0400",
                 total_au: "0.0400",
-                total: "1199.10"
+                total: input_quantity * input_unit_price * .999 + parseInt(input_premium) 
             });  
         
             if(input_metal == "gold")

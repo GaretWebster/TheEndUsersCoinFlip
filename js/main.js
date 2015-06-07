@@ -124,8 +124,14 @@ function promptLogout() {
 	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 function loadInfo() {
-    var authData = ref.getAuth();
-    document.getElementById("e_user_email").value = authData.password.email;
+    document.getElementById("e_user_email").value = old_email;
+    document.getElementById("e_user_password").value = "";
+    document.getElementById("p_user_password").value = "";
+    document.getElementById("p_user_new_password").value = "";
+    document.getElementById("e_update_alert").innerHTML = "";
+    document.getElementById("p_update_alert").value = "";
+
+
 }
 
 
