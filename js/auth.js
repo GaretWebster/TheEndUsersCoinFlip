@@ -68,8 +68,6 @@ function loginUser() {
 	var inputemail = document.getElementById("regemail").value;
     var inputpassword = document.getElementById("regpassword").value;
     
-    mixpanel.track("Log in", {"User": inputemail});
-
     ref.authWithPassword({
 		email    : inputemail,
 		password : inputpassword
@@ -79,6 +77,7 @@ function loginUser() {
 		} else {
 			document.getElementById("alert").innerHTML = "Log in successful!";
 			document.getElementById('register-div').style.display = 'none';
+            mixpanel.track("Log in", {"User": inputemail});
 
 			window.location = "wire2.html";
 		}});
