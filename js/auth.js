@@ -2,22 +2,18 @@ var ref = new Firebase("https://enduserscoinflip.firebaseio.com/");
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
-var old_email = ref.getAuth().password.email;
+var old_email;
 
 ref.onAuth(function(authData) {
 	var pathname = window.location.pathname;
 	var p = pathname.split("/").pop();
 	if (authData) {
+        old_email = ref.getAuth().password.email;
 		// user is already logged in, send them to wire2
 		if( p == "index.html" || p == "register.html" || p == "login.html" ) {
 			window.location = "wire2.html";
 		}
-		else if( p == "register.html") {
-			// tell user to log out before registering a new account
-		}
-		else if( p == "login.html") {
-			// tell user to log out before logging in
-		}
+
 	} else {
 		// if user is not logged in and not on index, register, or login page, redirect to index page
 		if( p != "index.html" && p != "register.html" && p != "login.html" ) {
