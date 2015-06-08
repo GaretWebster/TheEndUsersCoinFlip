@@ -7,7 +7,7 @@
 CoinFlip
 Coinflip is a web app that allows a user to manage their coin/bullion inventory. Users can track prices for a metal while adding to their own inventory. The aim of the web app is to assist in mitigating the asymmetrical information faced by bullion investors. The app helps users be aware of pricing information and possible resale opportunities.
 
-CoinFlip can be viewed online at:  https://rawgit.com/khchong/TheEndUsersCoinFlip/master/index.html
+CoinFlip can be viewed online at:  https://rawgit.com/GaretWebster/TheEndUsersCoinFlip/master/wire2.html
 
 Functionality
 The web is built to run on both desktop-size windows and mobile. This allows users to have easy access to the information on the app while on the go without having to navigate a desktop site on a mobile device. Users can login or create an account using their email, Facebook accounts, or Google accounts. Once logged on, they will have access to the current prices for Gold American Eagle, Silver Engelhard industrial bullion, and Platinum Engelhard fabricated products as well as the pricing for the past 20 days. They can navigate through the metals and see their inventory as well as the total value of their individual metals and total value of their inventory. When adding to their inventory, the user is presented with options of metal and the form it is in. They will be able to enter the unit price of the new item, the quantity, and premium to calculate the total value of the items being added. An image of the item(s) being added can also be added by upload from user. If a user sells an item they can delete it from their inventory. The app has account management options of changing email or password.
