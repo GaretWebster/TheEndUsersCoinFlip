@@ -34,7 +34,6 @@ We decided to use one of the tools the professor mentioned called Firebase. Fire
 Gold/Silver/Platinum Dataset - Quandl
 We used Quandl to get real time data for the current prices of gold, silver, and platinum. Data for the graphs was taken from the Quandl databases for Gold American Eagle, Silver Engelhard industrial bullion, and Platinum Engelhard fabricated products. The prices of the past 30 days are displayed from these sources in a graph, however since Quandl does not provide prices on the weekend, out application is limited by Quandl’s database. This data is used to display the current bid price of the metals.
 
-
 Analytics - Mixpanel
 For analytics we used Mixpanel. We decided to use Mixpanel over Google Analytics for two reasons; first Google Analytics has a high potential to be biased because it is also the distribution platform for most online advertising; Second Google Analytics offers a “smorgasbord” of statistics, when we only wanted specific information about the site. The information we thought would be relevant was most managed metal type, login type, page views, total log-ins, registration information, all data of items being added in from collection. This would allow us to see what is most important aspects of our application, and focus on those features rather than working on something that is not used much. Low usability can also indicate to us that it may not be as intuitive in our application than we thought it was when we designed it.
 
